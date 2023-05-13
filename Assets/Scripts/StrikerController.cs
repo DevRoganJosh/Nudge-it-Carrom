@@ -9,8 +9,10 @@ public class StrikerController : MonoBehaviour
     private Vector3 mousePosition;
     private bool isDraggingX = false;
     bool LockedX = false;
+    bool isCharging = false;
     float boundary1;
     float boundary2;
+
 
     // Start is called before the first frame update
     void Start()
@@ -30,30 +32,35 @@ public class StrikerController : MonoBehaviour
             float newX = Mathf.Clamp(mousePosition.x, boundary1, boundary2);
             transform.position = new Vector3(newX, initialPosition.y, initialPosition.z);
         }
+
     }
 
     private void OnMouseDown()
-    {   if(!LockedX)
-        if(!isDraggingX)
-        {
-        isDraggingX = true;
-        }
-        else
-        {
-            isDraggingX = false;
-        }
+    {
+        if (!LockedX)
+            if (!isDraggingX)
+            {
+                isDraggingX = true;
+            }
+            else
+            {
+                isDraggingX = false;
+            }
     }
 
     public void onClickLock()
-    {   if(!LockedX)
     {
-        LockedX = true;
-    }
+        if (!LockedX)
+        {
+            LockedX = true;
+            isCharging = true;
+        }
         else
         {
             LockedX = false;
+            isCharging = false;
         }
     }
 
-    
+
 }
