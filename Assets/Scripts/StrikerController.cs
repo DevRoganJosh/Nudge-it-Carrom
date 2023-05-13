@@ -6,7 +6,7 @@ public class StrikerController : MonoBehaviour
 {
     Rigidbody2D rb;
     private Vector3 initialPosition;
-    
+
     private Vector3 LockedPosition;
     private Vector3 mousePosition;
     private bool isDraggingX = false;
@@ -18,6 +18,7 @@ public class StrikerController : MonoBehaviour
     float ChargeClampX1;
     float ChargeClampX2;
     RaycastHit2D hit;
+    public GameObject Arrow;
 
     // Start is called before the first frame update
     void Start()
@@ -29,6 +30,7 @@ public class StrikerController : MonoBehaviour
         chargeClampY = -2.6f;
         ChargeClampX1 = -0.42f;
         ChargeClampX2 = 0.42f;
+        
     }
 
     void Update()
@@ -45,6 +47,11 @@ public class StrikerController : MonoBehaviour
             float CX = Mathf.Clamp(mousePosition.x, LockedPosition.x - 0.42f, LockedPosition.x + 0.42f);
             float CY = Mathf.Clamp(mousePosition.y, chargeClampY, -2.17f);
             transform.position = new Vector3(CX, CY, initialPosition.z);
+            Arrow.SetActive(true);
+        }
+        else
+        {
+            Arrow.SetActive(false);
         }
     }
 
@@ -63,8 +70,15 @@ public class StrikerController : MonoBehaviour
             }
         }
         else
-        {   
+        {
             isCharging = true;
+        }
+    }
+    private void OnMouseUp()
+    {
+        if(isCharging)
+        {
+            isCharging = false;
         }
     }
 
@@ -73,7 +87,7 @@ public class StrikerController : MonoBehaviour
         if (!LockedX)
         {
             LockedX = true;
-            
+
         }
         else
         {

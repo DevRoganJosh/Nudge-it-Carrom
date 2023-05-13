@@ -2252,6 +2252,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6887364108203911049, guid: 9db053338cd49094a85009528bed26b9, type: 3}
+      propertyPath: Arrow
+      value: 
+      objectReference: {fileID: 1329050667}
+    - target: {fileID: 6887364108203911049, guid: 9db053338cd49094a85009528bed26b9, type: 3}
       propertyPath: arrow
       value: 
       objectReference: {fileID: 1377940122}
