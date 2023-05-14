@@ -118,7 +118,23 @@ public class StrikerController : MonoBehaviour
         Arrow.enabled = false;
     }
 
-    
+    void OnCollisionEnter2D(Collision2D collision)
+{
+    if (collision.gameObject.tag == "Board")
+    {
+        // Get the point of contact and calculate the normal vector
+        Vector2 contact = collision.contacts[0].point;
+        Vector2 normal = (contact - (Vector2)transform.position).normalized;
+
+        // Calculate the reflection vector of the striker's velocity off the collision
+        Vector2 reflect = Vector2.Reflect(rb.velocity, normal);
+
+        // Apply the reflection to the striker's velocity
+        rb.velocity = reflect;
+    }
+}
+
+
 }
 
 
