@@ -5,6 +5,7 @@ using UnityEngine;
 public class Pockets : MonoBehaviour
 {
     GameManager gm;
+    public static int counter=0;
     void Start()
     {
         gm = FindObjectOfType<GameManager>();
@@ -13,12 +14,13 @@ public class Pockets : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.tag == "Black" || other.gameObject.tag == "White")
-        {
+        {   
+            counter++;
             if (GameManager.aiturn)
             {
                 gm.ScoreAI++;
@@ -33,7 +35,8 @@ public class Pockets : MonoBehaviour
             }
         }
         else if(other.gameObject.tag == "Queen")
-        {
+        {   
+            counter++;
             if (GameManager.aiturn)
             {
                 gm.ScoreAI+=2;
@@ -47,5 +50,17 @@ public class Pockets : MonoBehaviour
                 other.gameObject.SetActive(false);
             }
         }
+        else if(other.gameObject.tag == "Striker")
+        {
+            if(GameManager.aiturn)
+            {
+                GameManager.aiturn = false;
+            }
+            if(!GameManager.aiturn)
+            {
+                GameManager.aiturn = true;
+            }
+        }
+
     }
 }

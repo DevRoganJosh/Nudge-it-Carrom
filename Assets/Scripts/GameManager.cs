@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
    public static bool aiturn = false;
    public int ScoreP = 0;
    public int ScoreAI = 0;
+   public bool IsGameOver = false;
     void Start()
     {
     }
@@ -24,6 +25,18 @@ public class GameManager : MonoBehaviour
         {
             ai.enabled = false;
             aiturn = false;
+        }
+        if(IsGameOver)
+        {   
+            ai.enabled = false;
+            if(ScoreAI>ScoreP)
+            {
+                Debug.Log("You Lost");
+            }
+            else
+            {
+                Debug.Log("You Won");
+            }
         }
     }
     IEnumerator AITurn()

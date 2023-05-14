@@ -17,9 +17,12 @@ public class AIController : MonoBehaviour
 
     void Update()
     {
-        if (GameManager.aiturn && StrikerController.HasStopped)
+        if (GameManager.aiturn && StrikerController.HasStopped && Pockets.counter<1)
         {
-            // Find a random puck to hit
+            if (Pockets.counter == 16)
+            {
+                return;
+            }
             Pucks[] pucks = FindObjectsOfType<Pucks>();
             int index = Random.Range(0, pucks.Length);
             Pucks puck = pucks[index];
@@ -36,6 +39,7 @@ public class AIController : MonoBehaviour
             // End the AI's turn
             striker.MyTurn();
             GameManager.aiturn = false;
+
         }
     }
 }
