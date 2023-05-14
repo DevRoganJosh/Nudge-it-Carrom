@@ -1,23 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-   public AIController ai;
-   public float aidelay = 1f;
-   public static bool aiturn = false;
-   public int ScoreP = 0;
-   public int ScoreAI = 0;
-   public bool IsGameOver = false;
+    public AIController ai;
+    public float aidelay = 1f;
+    public static bool aiturn = false;
+    public int ScoreP = 0;
+    public int ScoreAI = 0;
+    public bool IsGameOver = false;
+    
     void Start()
     {
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(StrikerController.TurnOver)
+        if (StrikerController.TurnOver)
         {
             StartCoroutine(AITurn());
         }
@@ -25,11 +28,12 @@ public class GameManager : MonoBehaviour
         {
             ai.enabled = false;
             aiturn = false;
+            
         }
-        if(IsGameOver)
-        {   
+        if (IsGameOver)
+        {
             ai.enabled = false;
-            if(ScoreAI>ScoreP)
+            if (ScoreAI > ScoreP)
             {
                 Debug.Log("You Lost");
             }
@@ -45,5 +49,5 @@ public class GameManager : MonoBehaviour
         aiturn = true;
         ai.enabled = true;
     }
-    
+
 }

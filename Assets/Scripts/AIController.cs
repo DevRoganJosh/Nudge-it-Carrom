@@ -17,12 +17,8 @@ public class AIController : MonoBehaviour
 
     void Update()
     {
-        if (GameManager.aiturn && StrikerController.HasStopped && Pockets.counter<1)
+        if (GameManager.aiturn && StrikerController.HasStopped && Pockets.counter!=17)
         {
-            if (Pockets.counter == 16)
-            {
-                return;
-            }
             Pucks[] pucks = FindObjectsOfType<Pucks>();
             int index = Random.Range(0, pucks.Length);
             Pucks puck = pucks[index];
@@ -37,7 +33,8 @@ public class AIController : MonoBehaviour
             rb.AddForce(direction * force, ForceMode2D.Impulse);
 
             // End the AI's turn
-            striker.MyTurn();
+            // striker.MyTurn();
+            StrikerController.TurnOver = false;
             GameManager.aiturn = false;
 
         }
