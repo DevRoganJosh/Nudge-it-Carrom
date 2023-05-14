@@ -17,10 +17,11 @@ public class StrikerController : MonoBehaviour
     float CY;
     public float maxArrowScale = 2f;
     public LineRenderer Arrow;
-
     bool striked;
     public float forceMultiplier = 0.01f;
 
+    public float stopThreshold = 0.1f;
+    public float bounceForce = 1f;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -32,27 +33,36 @@ public class StrikerController : MonoBehaviour
 
     void Update()
     {
-        if (isDraggingX)
+        if (isDraggingX && !striked)
         {
             mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             float newX = Mathf.Clamp(mousePosition.x, boundary1, boundary2);
             transform.position = new Vector3(newX, initialPosition.y, initialPosition.z);
         }
-        if (isCharging)
+        if (isCharging && !striked)
         {
             mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             float CX = Mathf.Clamp(mousePosition.x, LockedPosition.x - 0.42f, LockedPosition.x + 0.42f);
-             CY = Mathf.Clamp(mousePosition.y, chargeClampY, -2.17f);
+            CY = Mathf.Clamp(mousePosition.y, chargeClampY, -2.17f);
             transform.position = new Vector3(CX, CY, initialPosition.z);
 
-            if (!striked)
-            {
-                Arrow.SetPosition(0, transform.position);
-                Arrow.SetPosition(1, -mousePosition);
-            }
-
+            Arrow.enabled = true;
+            Arrow.SetPosition(0, transform.position);
+            Arrow.SetPosition(1, -mousePosition);
 
         }
+        else if (striked && rb.velocity.magnitude < stopThreshold)
+        {
+            // Striker has stopped moving
+            rb.velocity = Vector2.zero;
+            transform.position = initialPosition;
+            Arrow.enabled = false;
+            striked = false;
+            LockedX = false;
+
+        }
+
+
 
     }
 
@@ -82,11 +92,7 @@ public class StrikerController : MonoBehaviour
             isCharging = false;
             striked = true;
 
-            float distance = Vector3.Distance(transform.position, LockedPosition);
-            float strength = distance * forceMultiplier / Mathf.Max(0.1f, CY - chargeClampY);
-            Vector2 direction = Arrow.GetPosition(1) - Arrow.GetPosition(0);
-            rb.AddForce(direction.normalized * strength, ForceMode2D.Impulse);
-            Arrow.enabled = false;
+            Strike();
         }
     }
 
@@ -103,7 +109,18 @@ public class StrikerController : MonoBehaviour
             isCharging = false;
         }
     }
+    public void Strike()
+    {
+        float distance = Vector3.Distance(transform.position, LockedPosition);
+        float strength = distance * forceMultiplier / Mathf.Max(0.1f, CY - chargeClampY);
+        Vector2 direction = Arrow.GetPosition(1) - Arrow.GetPosition(0);
+        rb.AddForce(direction.normalized * strength, ForceMode2D.Impulse);
+        Arrow.enabled = false;
+    }
 
-
+    
 }
+
+
+
 
