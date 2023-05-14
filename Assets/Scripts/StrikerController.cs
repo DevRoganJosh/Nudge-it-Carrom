@@ -1,12 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 public class StrikerController : MonoBehaviour
 {
     Rigidbody2D rb;
     private Vector3 initialPosition;
-
     private Vector3 LockedPosition;
     private Vector3 mousePosition;
     private bool isDraggingX = false;
@@ -15,12 +13,14 @@ public class StrikerController : MonoBehaviour
     float boundary1;
     float boundary2;
     float chargeClampY;
-    float ChargeClampX1;
-    float ChargeClampX2;
     RaycastHit2D hit;
-    public GameObject Arrow;
+    float CY;
+    public float maxArrowScale = 2f;
+    public LineRenderer Arrow;
 
-    // Start is called before the first frame update
+    bool striked;
+    public float forceMultiplier = 0.01f;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -28,9 +28,6 @@ public class StrikerController : MonoBehaviour
         boundary1 = -1.53f;
         boundary2 = 1.53f;
         chargeClampY = -2.6f;
-        ChargeClampX1 = -0.42f;
-        ChargeClampX2 = 0.42f;
-        
     }
 
     void Update()
@@ -45,14 +42,18 @@ public class StrikerController : MonoBehaviour
         {
             mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             float CX = Mathf.Clamp(mousePosition.x, LockedPosition.x - 0.42f, LockedPosition.x + 0.42f);
-            float CY = Mathf.Clamp(mousePosition.y, chargeClampY, -2.17f);
+             CY = Mathf.Clamp(mousePosition.y, chargeClampY, -2.17f);
             transform.position = new Vector3(CX, CY, initialPosition.z);
-            Arrow.SetActive(true);
+
+            if (!striked)
+            {
+                Arrow.SetPosition(0, transform.position);
+                Arrow.SetPosition(1, -mousePosition);
+            }
+
+
         }
-        else
-        {
-            Arrow.SetActive(false);
-        }
+
     }
 
     private void OnMouseDown()
@@ -76,9 +77,16 @@ public class StrikerController : MonoBehaviour
     }
     private void OnMouseUp()
     {
-        if(isCharging)
+        if (isCharging)
         {
             isCharging = false;
+            striked = true;
+
+            float distance = Vector3.Distance(transform.position, LockedPosition);
+            float strength = distance * forceMultiplier / Mathf.Max(0.1f, CY - chargeClampY);
+            Vector2 direction = Arrow.GetPosition(1) - Arrow.GetPosition(0);
+            rb.AddForce(direction.normalized * strength, ForceMode2D.Impulse);
+            Arrow.enabled = false;
         }
     }
 
@@ -98,3 +106,4 @@ public class StrikerController : MonoBehaviour
 
 
 }
+
