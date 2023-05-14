@@ -4049,8 +4049,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29e6222069331324bb9079be63ad079e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxForce: 22
-  minForce: 14
+  maxForce: 24
+  minForce: 16
 --- !u!1001 &8431690416663133056
 PrefabInstance:
   m_ObjectHideFlags: 0

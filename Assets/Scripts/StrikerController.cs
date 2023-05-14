@@ -22,7 +22,6 @@ public class StrikerController : MonoBehaviour
     public float forceMultiplier = 0.01f;
 
     public float stopThreshold = 0.1f;
-    public float bounceForce = 1f;
     public static bool TurnOver;
     public static bool HasStopped = false;
     public static Vector3 AISide;
@@ -71,6 +70,15 @@ public class StrikerController : MonoBehaviour
         else if (striked)
         {
             timeRemaining = 11f;
+        }
+
+        if(AIController.AIstriked)
+        {
+            if(rb.velocity.magnitude < stopThreshold && tikkis.rb.velocity.magnitude < stopThreshold)
+            {
+                GameManager.aiturn = false;
+                TurnOver = false;
+            }
         }
     }
 

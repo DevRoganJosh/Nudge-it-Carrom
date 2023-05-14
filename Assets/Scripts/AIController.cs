@@ -8,11 +8,13 @@ public class AIController : MonoBehaviour
     public float minForce = 20f;
     private Rigidbody2D rb;
     private StrikerController striker;
+    public static bool AIstriked;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         striker = FindObjectOfType<StrikerController>();
+        AIstriked = false;
     }
 
     void Update()
@@ -35,7 +37,8 @@ public class AIController : MonoBehaviour
             // End the AI's turn
             // striker.MyTurn();
             StrikerController.TurnOver = false;
-            GameManager.aiturn = false;
+            // GameManager.aiturn = false;
+            AIstriked = true;
 
         }
     }
