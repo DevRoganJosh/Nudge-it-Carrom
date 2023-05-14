@@ -23,6 +23,8 @@ public class StrikerController : MonoBehaviour
     public float stopThreshold = 0.1f;
     public float bounceForce = 1f;
     public static bool TurnOver = false;
+    public static bool HasStopped = false;
+    public static Vector3 AISide;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -30,6 +32,8 @@ public class StrikerController : MonoBehaviour
         boundary1 = -1.53f;
         boundary2 = 1.53f;
         chargeClampY = -2.6f;
+        AISide.x = initialPosition.x;
+        AISide.y = initialPosition.y + 3.77f;
     }
 
     void Update()
@@ -38,6 +42,10 @@ public class StrikerController : MonoBehaviour
         if(!TurnOver)
         {
             MyTurn();
+        }
+        else
+        {
+            transform.position = new Vector2(AISide.x,AISide.y);
         }
 
     }
@@ -111,7 +119,7 @@ public class StrikerController : MonoBehaviour
     // }
     public void MyTurn()
     {
-
+        TurnOver = false;
         if (isDraggingX && !striked)
         {
             mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -139,6 +147,7 @@ public class StrikerController : MonoBehaviour
             striked = false;
             LockedX = false;
             TurnOver = true;
+            HasStopped = true;
 
         }
     }

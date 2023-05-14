@@ -19,4 +19,4 @@ public class Pockets : MonoBehaviour
         if(other.gameObject.tag!="Striker")
         other.gameObject.SetActive(false);
     }
-}
+}   
