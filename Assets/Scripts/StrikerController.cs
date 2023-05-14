@@ -41,7 +41,7 @@ public class StrikerController : MonoBehaviour
     void Update()
     {
 
-        if(!TurnOver)
+        if(!TurnOver )
         {
             MyTurn();
         }
@@ -53,7 +53,8 @@ public class StrikerController : MonoBehaviour
     }
 
     private void OnMouseDown()
-    {
+    {   
+        if(rb.velocity.magnitude < stopThreshold && tikkis.rb.velocity.magnitude < stopThreshold && !TurnOver)
         if (!LockedX)
         {
             if (!isDraggingX)
@@ -72,7 +73,7 @@ public class StrikerController : MonoBehaviour
         }
     }
     private void OnMouseUp()
-    {
+    {  
         if (isCharging)
         {
             isCharging = false;
@@ -83,7 +84,8 @@ public class StrikerController : MonoBehaviour
     }
 
     public void onClickLock()
-    {
+    {   
+       if(rb.velocity.magnitude < stopThreshold && tikkis.rb.velocity.magnitude < stopThreshold)
         if (!LockedX)
         {
             LockedX = true;

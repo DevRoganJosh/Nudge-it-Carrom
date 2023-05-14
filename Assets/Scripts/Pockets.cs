@@ -32,5 +32,20 @@ public class Pockets : MonoBehaviour
                 other.gameObject.SetActive(false);
             }
         }
+        else if(other.gameObject.tag == "Queen")
+        {
+            if (GameManager.aiturn)
+            {
+                gm.ScoreAI+=2;
+                Debug.Log("Ai Score : " + gm.ScoreAI);
+                other.gameObject.SetActive(false);
+            }
+            else if (!GameManager.aiturn)
+            {
+                gm.ScoreP+=2;
+                Debug.Log("Player Score : " + gm.ScoreP);
+                other.gameObject.SetActive(false);
+            }
+        }
     }
 }
