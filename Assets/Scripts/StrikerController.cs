@@ -22,6 +22,7 @@ public class StrikerController : MonoBehaviour
 
     public float stopThreshold = 0.1f;
     public float bounceForce = 1f;
+    public static bool TurnOver = false;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -33,36 +34,11 @@ public class StrikerController : MonoBehaviour
 
     void Update()
     {
-        if (isDraggingX && !striked)
+
+        if(!TurnOver)
         {
-            mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            float newX = Mathf.Clamp(mousePosition.x, boundary1, boundary2);
-            transform.position = new Vector3(newX, initialPosition.y, initialPosition.z);
+            MyTurn();
         }
-        if (isCharging && !striked)
-        {
-            mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            float CX = Mathf.Clamp(mousePosition.x, LockedPosition.x - 0.42f, LockedPosition.x + 0.42f);
-            CY = Mathf.Clamp(mousePosition.y, chargeClampY, -2.17f);
-            transform.position = new Vector3(CX, CY, initialPosition.z);
-
-            Arrow.enabled = true;
-            Arrow.SetPosition(0, transform.position);
-            Arrow.SetPosition(1, -mousePosition);
-
-        }
-        else if (striked && rb.velocity.magnitude < stopThreshold)
-        {
-            // Striker has stopped moving
-            rb.velocity = Vector2.zero;
-            transform.position = initialPosition;
-            Arrow.enabled = false;
-            striked = false;
-            LockedX = false;
-
-        }
-
-
 
     }
 
@@ -118,22 +94,54 @@ public class StrikerController : MonoBehaviour
         Arrow.enabled = false;
     }
 
-//     void OnCollisionEnter2D(Collision2D collision)
-// {
-//     if (collision.gameObject.tag == "Board")
-//     {
-//         // Get the point of contact and calculate the normal vector
-//         Vector2 contact = collision.contacts[0].point;
-//         Vector2 normal = (contact - (Vector2)transform.position).normalized;
+    //     void OnCollisionEnter2D(Collision2D collision)
+    // {
+    //     if (collision.gameObject.tag == "Board")
+    //     {
+    //         // Get the point of contact and calculate the normal vector
+    //         Vector2 contact = collision.contacts[0].point;
+    //         Vector2 normal = (contact - (Vector2)transform.position).normalized;
 
-//         // Calculate the reflection vector of the striker's velocity off the collision
-//         Vector2 reflect = Vector2.Reflect(rb.velocity, normal);
+    //         // Calculate the reflection vector of the striker's velocity off the collision
+    //         Vector2 reflect = Vector2.Reflect(rb.velocity, normal);
 
-//         // Apply the reflection to the striker's velocity
-//         rb.velocity = reflect;
-//     }
-// }
+    //         // Apply the reflection to the striker's velocity
+    //         rb.velocity = reflect;
+    //     }
+    // }
+    public void MyTurn()
+    {
 
+        if (isDraggingX && !striked)
+        {
+            mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            float newX = Mathf.Clamp(mousePosition.x, boundary1, boundary2);
+            transform.position = new Vector3(newX, initialPosition.y, initialPosition.z);
+        }
+        if (isCharging && !striked)
+        {
+            mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            float CX = Mathf.Clamp(mousePosition.x, LockedPosition.x - 0.42f, LockedPosition.x + 0.42f);
+            CY = Mathf.Clamp(mousePosition.y, chargeClampY, -2.17f);
+            transform.position = new Vector3(CX, CY, initialPosition.z);
+
+            Arrow.enabled = true;
+            Arrow.SetPosition(0, transform.position);
+            Arrow.SetPosition(1, -mousePosition);
+
+        }
+        else if (striked && rb.velocity.magnitude < stopThreshold)
+        {
+            // Striker has stopped moving
+            rb.velocity = Vector2.zero;
+            transform.position = initialPosition;
+            Arrow.enabled = false;
+            striked = false;
+            LockedX = false;
+            TurnOver = true;
+
+        }
+    }
 
 }
 
