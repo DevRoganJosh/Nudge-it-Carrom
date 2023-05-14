@@ -25,6 +25,7 @@ public class StrikerController : MonoBehaviour
     public static bool TurnOver = false;
     public static bool HasStopped = false;
     public static Vector3 AISide;
+    Pucks tikkis;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -34,6 +35,7 @@ public class StrikerController : MonoBehaviour
         chargeClampY = -2.6f;
         AISide.x = initialPosition.x;
         AISide.y = initialPosition.y + 3.77f;
+        tikkis = FindObjectOfType<Pucks>();
     }
 
     void Update()
@@ -138,7 +140,7 @@ public class StrikerController : MonoBehaviour
             Arrow.SetPosition(1, -mousePosition);
 
         }
-        else if (striked && rb.velocity.magnitude < stopThreshold)
+        else if (striked && rb.velocity.magnitude < stopThreshold && tikkis.rb.velocity.magnitude < stopThreshold)
         {
             // Striker has stopped moving
             rb.velocity = Vector2.zero;
@@ -148,6 +150,7 @@ public class StrikerController : MonoBehaviour
             LockedX = false;
             TurnOver = true;
             HasStopped = true;
+            GameManager.aiturn = true;
 
         }
     }

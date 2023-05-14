@@ -4,7 +4,7 @@ using System.Collections.Generic;
 public class Pucks : MonoBehaviour
 {
 
-    private Rigidbody2D rb;
+    public Rigidbody2D rb;
 
     void Awake()
     {

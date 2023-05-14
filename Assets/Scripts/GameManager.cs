@@ -7,6 +7,8 @@ public class GameManager : MonoBehaviour
    public AIController ai;
    public float aidelay = 1f;
    public static bool aiturn = false;
+   public int ScoreP = 0;
+   public int ScoreAI = 0;
     void Start()
     {
     }
@@ -21,6 +23,7 @@ public class GameManager : MonoBehaviour
         else
         {
             ai.enabled = false;
+            aiturn = false;
         }
     }
     IEnumerator AITurn()
