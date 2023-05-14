@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6887364108203911049}
   m_Layer: 0
   m_Name: striker
-  m_TagString: Untagged
+  m_TagString: Striker
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -136,3 +136,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48b824ccda2950d46ab1e826dfd371f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxArrowScale: 2
+  Arrow: {fileID: 0}
+  forceMultiplier: 0.01
+  stopThreshold: 0.1
+  bounceForce: 1

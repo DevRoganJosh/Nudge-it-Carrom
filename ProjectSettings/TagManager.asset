@@ -5,6 +5,10 @@ TagManager:
   serializedVersion: 2
   tags:
   - Board
+  - Black
+  - Queen
+  - White
+  - Striker
   layers:
   - Default
   - TransparentFX

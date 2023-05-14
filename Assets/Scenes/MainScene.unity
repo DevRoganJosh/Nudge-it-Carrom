@@ -350,6 +350,7 @@ GameObject:
   m_Component:
   - component: {fileID: 396401882}
   - component: {fileID: 396401883}
+  - component: {fileID: 396401884}
   m_Layer: 0
   m_Name: g2
   m_TagString: Untagged
@@ -388,6 +389,18 @@ CircleCollider2D:
   m_Offset: {x: -0.36390066, y: 0.04327476}
   serializedVersion: 2
   m_Radius: 0.09282458
+--- !u!114 &396401884
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 396401881}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46593e17aacd73243a59f484af38ad0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &466550396
 GameObject:
   m_ObjectHideFlags: 0
@@ -700,7 +713,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 4.8, y: -672.6}
+  m_AnchoredPosition: {x: 4.8, y: -737}
   m_SizeDelta: {x: 128, y: 128}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &664115739
@@ -1755,6 +1768,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1924057157}
   - component: {fileID: 1924057158}
+  - component: {fileID: 1924057159}
   m_Layer: 0
   m_Name: g3
   m_TagString: Untagged
@@ -1793,6 +1807,18 @@ CircleCollider2D:
   m_Offset: {x: -0.36390066, y: 0.04327476}
   serializedVersion: 2
   m_Radius: 0.09282458
+--- !u!114 &1924057159
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1924057156}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46593e17aacd73243a59f484af38ad0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1924396244 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8431690416439856980, guid: 4f381d6abbe90734a88bdd3a8f3267ca, type: 3}
@@ -2000,6 +2026,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2006981168}
   - component: {fileID: 2006981169}
+  - component: {fileID: 2006981170}
   m_Layer: 0
   m_Name: g4
   m_TagString: Untagged
@@ -2038,6 +2065,18 @@ CircleCollider2D:
   m_Offset: {x: -0.36390066, y: 0.04327476}
   serializedVersion: 2
   m_Radius: 0.09282458
+--- !u!114 &2006981170
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2006981167}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46593e17aacd73243a59f484af38ad0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2027241845
 GameObject:
   m_ObjectHideFlags: 0
@@ -2048,6 +2087,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2027241846}
   - component: {fileID: 2027241847}
+  - component: {fileID: 2027241848}
   m_Layer: 0
   m_Name: g1
   m_TagString: Untagged
@@ -2086,6 +2126,18 @@ CircleCollider2D:
   m_Offset: {x: -0.36390066, y: 0.04327476}
   serializedVersion: 2
   m_Radius: 0.09282458
+--- !u!114 &2027241848
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2027241845}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46593e17aacd73243a59f484af38ad0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2067999048
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2364,7 +2416,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6887364106651901424, guid: 9db053338cd49094a85009528bed26b9, type: 3}
       propertyPath: m_TagString
-      value: Board
+      value: Striker
       objectReference: {fileID: 0}
     - target: {fileID: 6887364106651901425, guid: 9db053338cd49094a85009528bed26b9, type: 3}
       propertyPath: m_FlipX
@@ -2463,8 +2515,12 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1377940125}
     - target: {fileID: 6887364108203911049, guid: 9db053338cd49094a85009528bed26b9, type: 3}
+      propertyPath: stopThreshold
+      value: 0.001
+      objectReference: {fileID: 0}
+    - target: {fileID: 6887364108203911049, guid: 9db053338cd49094a85009528bed26b9, type: 3}
       propertyPath: forceMultiplier
-      value: 3
+      value: 2.8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9db053338cd49094a85009528bed26b9, type: 3}
