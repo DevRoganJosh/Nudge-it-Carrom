@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 public class StrikerController : MonoBehaviour
 {
     Rigidbody2D rb;
@@ -22,13 +21,11 @@ public class StrikerController : MonoBehaviour
     public float forceMultiplier = 0.01f;
 
     public float stopThreshold = 0.1f;
-    public static bool TurnOver;
+    public float bounceForce = 1f;
+    public static bool TurnOver = false;
     public static bool HasStopped = false;
     public static Vector3 AISide;
     Pucks tikkis;
-    float timeRemaining;
-    public static bool MiniTimeOver = false;
-    public Text MinitimerText;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -39,71 +36,44 @@ public class StrikerController : MonoBehaviour
         AISide.x = initialPosition.x;
         AISide.y = initialPosition.y + 3.77f;
         tikkis = FindObjectOfType<Pucks>();
-        timeRemaining = 10f;
     }
 
     void Update()
     {
 
-        if (!TurnOver && Pockets.counter != 17)
+        if(!TurnOver && !CheckPucks.allDeactivated)
         {
             MyTurn();
-            // striked = false;
         }
         else
         {
-            transform.position = new Vector2(AISide.x, AISide.y);
+            transform.position = new Vector2(AISide.x,AISide.y);
         }
 
-        if (!striked)
-        {
-            if (!TurnOver)
-            {
-                if (timeRemaining > 1)
-                {
-                    timeRemaining -= Time.deltaTime;
-                    float seconds = Mathf.FloorToInt(timeRemaining);
-                    MinitimerText.text = seconds.ToString();
-                }
-            }
-        }
-        else if (striked)
-        {
-            timeRemaining = 11f;
-        }
-
-        if(AIController.AIstriked)
-        {
-            if(rb.velocity.magnitude < stopThreshold && tikkis.rb.velocity.magnitude < stopThreshold)
-            {
-                GameManager.aiturn = false;
-                TurnOver = false;
-            }
-        }
     }
 
     private void OnMouseDown()
-    {
-        if (rb.velocity.magnitude < stopThreshold && tikkis.rb.velocity.magnitude < stopThreshold && !TurnOver && Pockets.counter != 17)
-            if (!LockedX)
+    {   
+        if(rb.velocity.magnitude < stopThreshold && tikkis.rb.velocity.magnitude < stopThreshold && !TurnOver && !CheckPucks.allDeactivated)
+        if (!LockedX)
+        {
+            if (!isDraggingX)
             {
-                if (!isDraggingX)
-                {
-                    isDraggingX = true;
-                }
-                else
-                {
-                    isDraggingX = false;
-                    LockedPosition = transform.position;
-                }
+                isDraggingX = true;
             }
             else
             {
-                isCharging = true;
+                isDraggingX = false;
+                LockedPosition = transform.position;
             }
+        }
+        else
+        {
+            isCharging = true;
+        }
     }
     private void OnMouseUp()
-    {
+    {  
         if (isCharging)
         {
             isCharging = false;
@@ -114,18 +84,18 @@ public class StrikerController : MonoBehaviour
     }
 
     public void onClickLock()
-    {
-        if (rb.velocity.magnitude < stopThreshold && tikkis.rb.velocity.magnitude < stopThreshold)
-            if (!LockedX)
-            {
-                LockedX = true;
+    {   
+       if(rb.velocity.magnitude < stopThreshold && tikkis.rb.velocity.magnitude < stopThreshold)
+        if (!LockedX)
+        {
+            LockedX = true;
 
-            }
-            else
-            {
-                LockedX = false;
-                isCharging = false;
-            }
+        }
+        else
+        {
+            LockedX = false;
+            isCharging = false;
+        }
     }
     public void Strike()
     {
@@ -138,7 +108,7 @@ public class StrikerController : MonoBehaviour
 
     public void MyTurn()
     {
-        
+        TurnOver = false;
         if (isDraggingX && !striked)
         {
             mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -161,15 +131,15 @@ public class StrikerController : MonoBehaviour
         {
             // Striker has stopped moving
             rb.velocity = Vector2.zero;
-            // transform.position = initialPosition;
+            transform.position = initialPosition;
             Arrow.enabled = false;
+            striked = false;
             LockedX = false;
             TurnOver = true;
             HasStopped = true;
             GameManager.aiturn = true;
 
         }
-
     }
 
 }

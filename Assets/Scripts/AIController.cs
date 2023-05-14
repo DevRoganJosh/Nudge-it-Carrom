@@ -8,19 +8,21 @@ public class AIController : MonoBehaviour
     public float minForce = 20f;
     private Rigidbody2D rb;
     private StrikerController striker;
-    public static bool AIstriked;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         striker = FindObjectOfType<StrikerController>();
-        AIstriked = false;
     }
 
     void Update()
     {
-        if (GameManager.aiturn && StrikerController.HasStopped && Pockets.counter!=17)
+        if (GameManager.aiturn && StrikerController.HasStopped && Pockets.counter<1)
         {
+            if (Pockets.counter == 16)
+            {
+                return;
+            }
             Pucks[] pucks = FindObjectsOfType<Pucks>();
             int index = Random.Range(0, pucks.Length);
             Pucks puck = pucks[index];
@@ -35,10 +37,8 @@ public class AIController : MonoBehaviour
             rb.AddForce(direction * force, ForceMode2D.Impulse);
 
             // End the AI's turn
-            // striker.MyTurn();
-            StrikerController.TurnOver = false;
-            // GameManager.aiturn = false;
-            AIstriked = true;
+            striker.MyTurn();
+            GameManager.aiturn = false;
 
         }
     }
