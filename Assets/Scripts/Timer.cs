@@ -12,6 +12,10 @@ public class Timer : MonoBehaviour
     public GameObject GameOverPanelL;
     public GameManager gm;
 
+    private void Start() 
+    {
+        timeRemaining = 120f;
+    }
     private void Update()
     {
         if (timeRemaining > 0)

@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
     {
         ScoreP = 0;
         ScoreAI = 0;
+        timeRemaining = 11f;
     }
 
     // Update is called once per frame

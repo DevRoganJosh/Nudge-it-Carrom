@@ -59,8 +59,8 @@ public class StrikerController : MonoBehaviour
                 }
                 else
                 {
-                    isDraggingX = false;
-                    LockedPosition = transform.position;
+                    // isDraggingX = false;
+                    // LockedPosition = transform.position;
                 }
             }
             else
@@ -71,6 +71,7 @@ public class StrikerController : MonoBehaviour
     private void OnMouseUp()
     {   
         if(!TurnOver)
+        isDraggingX = false;
         if (isCharging)
         {
             isCharging = false;
@@ -85,6 +86,7 @@ public class StrikerController : MonoBehaviour
             if (!LockedX)
             {
                 LockedX = true;
+                LockedPosition = transform.position;
             }
             else
             {

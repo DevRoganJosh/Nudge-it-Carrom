@@ -21,6 +21,7 @@ public class Buttons : MonoBehaviour
     {
         SceneManager.LoadScene("Intro");
         isPaused = false;
+        Time.timeScale = 1;
     }
     public void Pause()
     {
