@@ -56,21 +56,6 @@ public class Pockets : MonoBehaviour
                 other.gameObject.SetActive(false);
             }
         }
-        // else if (other.gameObject.tag == "Striker")
-        // {
-        //     if (GameManager.aiturn)
-        //     {
-        //         GameManager.aiturn = false;
-        //         if (gm.ScoreAI > 0)
-        //             gm.ScoreAI--;
-        //     }
-        //     if (!GameManager.aiturn)
-        //     {
-        //         GameManager.aiturn = true;
-        //         if (gm.ScoreP > 0)
-        //             gm.ScoreP--;
-        //     }
-        // }
 
     }
 }

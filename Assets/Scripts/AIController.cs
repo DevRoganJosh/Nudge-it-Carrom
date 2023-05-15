@@ -25,13 +25,10 @@ public class AIController : MonoBehaviour
             int index = Random.Range(0, pucks.Length);
             Pucks puck = pucks[index];
 
-            // Calculate a random force to hit the puck with
             float force = Random.Range(minForce, maxForce);
 
-            // Calculate the direction to hit the puck in
             Vector2 direction = (puck.transform.position - transform.position).normalized;
 
-            // Strike the striker with the calculated force and direction
             rb.AddForce(direction * force, ForceMode2D.Impulse);
             AIStriked = true;
 

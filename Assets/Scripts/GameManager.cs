@@ -65,13 +65,13 @@ public class GameManager : MonoBehaviour
                 float seconds = Mathf.FloorToInt(timeRemaining);
                 ShortTimerTxt.text = seconds.ToString();
             }
-            else if (timeRemaining <= 0 && !isScoreDecreased) // change condition to <= 0
+            else if (timeRemaining <= 0 && !isScoreDecreased) 
             {
                 Debug.Log("-1 point");
                 ScoreP--;
                 isScoreDecreased = true;
-                timeRemaining = 0; // reset timer to 0
-                ShortTimerTxt.text = "0"; // update text to show 0 seconds
+                timeRemaining = 0; 
+                ShortTimerTxt.text = "0"; 
             }
     }
 
