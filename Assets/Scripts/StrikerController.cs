@@ -25,6 +25,7 @@ public class StrikerController : MonoBehaviour
     public static bool HasStopped = false;
     public static Vector3 AISide;
     Pucks tikkis;
+    bool doOnce = true;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -114,6 +115,7 @@ public class StrikerController : MonoBehaviour
     public void MyTurn()
     {
         TurnOver = false;
+        doOnce = true;
         if (isDraggingX && !striked)
         {
             mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -136,7 +138,11 @@ public class StrikerController : MonoBehaviour
         {
             // Striker has stopped moving
             rb.velocity = Vector2.zero;
-            // transform.position = AISide;
+            if(doOnce)
+            {
+            transform.position = AISide;
+            }
+            doOnce = false;
             Arrow.enabled = false;
             striked = false;
             LockedX = false;
