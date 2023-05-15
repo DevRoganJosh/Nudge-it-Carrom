@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
+using TMPro;
 public class GameManager : MonoBehaviour
 {
     public AIController ai;
@@ -11,7 +12,7 @@ public class GameManager : MonoBehaviour
     public int ScoreAI = 0;
     public Text ShortTimerTxt;
     public float timeRemaining = 11f;
-
+    public TextMeshProUGUI[] gotxtscore;
     private bool isScoreDecreased = false;
     void Start()
     {
@@ -38,6 +39,13 @@ public class GameManager : MonoBehaviour
         else
         {
             timeRemaining = 10f;
+        }
+        if (Timer.TimeOver)
+        {
+            for (int i = 0; i < gotxtscore.Length; i++)
+            {
+                gotxtscore[i].text = ScoreP.ToString();
+            }
         }
     }
     IEnumerator AITurn()

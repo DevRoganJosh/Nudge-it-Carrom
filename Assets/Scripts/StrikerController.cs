@@ -43,7 +43,7 @@ public class StrikerController : MonoBehaviour
     void Update()
     {
 
-        if (!TurnOver && !CheckPucks.allDeactivated && !Timer.TimeOver)
+        if (!TurnOver && !CheckPucks.allDeactivated && !Timer.TimeOver && !Buttons.isPaused)
         {
             MyTurn();
         }
@@ -52,7 +52,7 @@ public class StrikerController : MonoBehaviour
 
     private void OnMouseDown()
     {   
-        if(!Timer.TimeOver)
+        if(!Timer.TimeOver || !Buttons.isPaused)
         if (rb.velocity.magnitude < stopThreshold && tikkis.rb.velocity.magnitude < stopThreshold && !TurnOver && !CheckPucks.allDeactivated)
             if (!LockedX)
             {
