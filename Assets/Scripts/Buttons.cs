@@ -20,6 +20,7 @@ public class Buttons : MonoBehaviour
     public void MainMenu()
     {
         SceneManager.LoadScene("Intro");
+        isPaused = false;
     }
     public void Pause()
     {
@@ -39,4 +40,12 @@ public class Buttons : MonoBehaviour
         }
 
     }
+    public void Resume()
+    {
+        Time.timeScale = 1;
+        PausePanel.SetActive(false);
+        GamePanel.SetActive(true);
+        isPaused = false;
+    }
+    
 }
