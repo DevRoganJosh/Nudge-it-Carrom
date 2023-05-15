@@ -19,7 +19,8 @@ public class Pockets : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        AIScoreText.text = gm.ScoreAI.ToString();
+        PlayerScoreText.text = gm.ScoreP.ToString();
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
