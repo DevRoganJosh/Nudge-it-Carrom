@@ -8,7 +8,7 @@ I always like to work with the process of documenting the things, as this projec
 Tasks and solutions :
 The game is a single player and can be played on any mobile devices! UI will be scalled according to the the device.
 Mechanics : Usually when we play a carrom game we see mostly same type of controls present in every carrom game. Considering this fact I had made other way of controlling the striker. As mentioned the striker can be dragged behind for the force. Force can be applied only when the striker changes its Y pos.
-Physics : All the components of the game follow physics!
+Physics : All the components of the game follow physics! But every pucks and striker were made more dynamic and less frictional to promotre scoring and making a bit intresting (timer constraint).
 Boundaries : Bouncing off the boundaries was implemented while keeping in mind the friction and total force applied to the bodies.
 Scoring : To keep the game simple I didn't implement foul striker. Game is only of 2 minutes so creating more rules can ruin the experience and hence only implemeted a short timer to avoid wastage of time. Regular pucks give 1 point, Queen goes for 2 points while short timer running off deducts a point from player's score.
 Timer : implemented after I was done with the core mechanics and gameplay.
