@@ -30,6 +30,11 @@ public class Timer : MonoBehaviour
             TimeOver = true;
         }
         GameOverW();
+        if(Pockets.counter==17)
+        {
+            TimeOver = true;
+            timeRemaining = 0;
+        }
     }
 
     void DisplayTime(float timeToDisplay)
