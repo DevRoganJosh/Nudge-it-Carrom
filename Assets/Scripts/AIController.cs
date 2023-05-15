@@ -8,6 +8,7 @@ public class AIController : MonoBehaviour
     public float minForce = 20f;
     private Rigidbody2D rb;
     private StrikerController striker;
+    public bool AIStriked;
 
     void Start()
     {
@@ -17,9 +18,8 @@ public class AIController : MonoBehaviour
 
     void Update()
     {
-        if (GameManager.aiturn && StrikerController.HasStopped && Pockets.counter<17)
+        if (GameManager.aiturn && StrikerController.HasStopped && Pockets.counter < 17 && !AIStriked)
         {
-            
             Pucks[] pucks = FindObjectsOfType<Pucks>();
             int index = Random.Range(0, pucks.Length);
             Pucks puck = pucks[index];
@@ -32,13 +32,12 @@ public class AIController : MonoBehaviour
 
             // Strike the striker with the calculated force and direction
             rb.AddForce(direction * force, ForceMode2D.Impulse);
+            AIStriked = true;
+        }
 
-            // End the AI's turn
-            // striker.MyTurn();
+        if (AIStriked && rb.velocity.magnitude < 0.001f)
+        {
             StrikerController.TurnOver = false;
-            GameManager.aiturn = false;
-
         }
     }
 }
-

@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            ai.enabled = false;
+            // ai.enabled = false;
             aiturn = false;
         }
         if (IsGameOver)
@@ -42,11 +42,11 @@ public class GameManager : MonoBehaviour
                 Debug.Log("You Won");
             }
         }
-        if (!aiturn)
+        if (!StrikerController.TurnOver && !StrikerController.striked)
         {
             ShortTimerUpdate();
         }
-        else 
+        else
         {
             timeRemaining = 10f;
         }
@@ -55,7 +55,7 @@ public class GameManager : MonoBehaviour
     {
         yield return new WaitForSeconds(aidelay);
         aiturn = true;
-        ai.enabled = true;
+        // ai.enabled = true;
     }
 
     public void ShortTimerUpdate()

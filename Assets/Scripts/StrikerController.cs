@@ -17,9 +17,8 @@ public class StrikerController : MonoBehaviour
     float CY;
     public float maxArrowScale = 2f;
     public LineRenderer Arrow;
-    bool striked;
+    public static bool striked;
     public float forceMultiplier = 0.01f;
-
     public float stopThreshold = 0.1f;
     public float bounceForce = 1f;
     public static bool TurnOver = false;
@@ -41,39 +40,45 @@ public class StrikerController : MonoBehaviour
     void Update()
     {
 
-        if(!TurnOver && !CheckPucks.allDeactivated)
+        if (!TurnOver && !CheckPucks.allDeactivated)
         {
             MyTurn();
         }
         else
         {
-            transform.position = new Vector2(AISide.x,AISide.y);
+            transform.position = new Vector2(AISide.x, AISide.y);
         }
-        
+        // if (rb.velocity.magnitude < stopThreshold && tikkis.rb.velocity.magnitude < stopThreshold)
+        // {
+        //     if (AIController.AIStriked || striked)
+        //     {
+        //         HasStopped = true;
+        //     }
+        // }
     }
 
     private void OnMouseDown()
-    {   
-        if(rb.velocity.magnitude < stopThreshold && tikkis.rb.velocity.magnitude < stopThreshold && !TurnOver && !CheckPucks.allDeactivated)
-        if (!LockedX)
-        {
-            if (!isDraggingX)
+    {
+        if (rb.velocity.magnitude < stopThreshold && tikkis.rb.velocity.magnitude < stopThreshold && !TurnOver && !CheckPucks.allDeactivated)
+            if (!LockedX)
             {
-                isDraggingX = true;
+                if (!isDraggingX)
+                {
+                    isDraggingX = true;
+                }
+                else
+                {
+                    isDraggingX = false;
+                    LockedPosition = transform.position;
+                }
             }
             else
             {
-                isDraggingX = false;
-                LockedPosition = transform.position;
+                isCharging = true;
             }
-        }
-        else
-        {
-            isCharging = true;
-        }
     }
     private void OnMouseUp()
-    {  
+    {
         if (isCharging)
         {
             isCharging = false;
@@ -84,18 +89,18 @@ public class StrikerController : MonoBehaviour
     }
 
     public void onClickLock()
-    {   
-       if(rb.velocity.magnitude < stopThreshold && tikkis.rb.velocity.magnitude < stopThreshold)
-        if (!LockedX)
-        {
-            LockedX = true;
+    {
+        if (rb.velocity.magnitude < stopThreshold && tikkis.rb.velocity.magnitude < stopThreshold)
+            if (!LockedX)
+            {
+                LockedX = true;
 
-        }
-        else
-        {
-            LockedX = false;
-            isCharging = false;
-        }
+            }
+            else
+            {
+                LockedX = false;
+                isCharging = false;
+            }
     }
     public void Strike()
     {
@@ -131,14 +136,23 @@ public class StrikerController : MonoBehaviour
         {
             // Striker has stopped moving
             rb.velocity = Vector2.zero;
-            // transform.position = initialPosition;
+            transform.position = AISide;
             Arrow.enabled = false;
             striked = false;
             LockedX = false;
             TurnOver = true;
             HasStopped = true;
-            GameManager.aiturn = true;
+            // AIController.AIStriked = false;
+            // GameManager.aiturn = true;
 
+        }
+
+    }
+    public void stopcheck()
+    {   
+        if (rb.velocity.magnitude < stopThreshold && tikkis.rb.velocity.magnitude < stopThreshold)
+        {
+            TurnOver = false;
         }
     }
 
