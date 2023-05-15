@@ -46,7 +46,7 @@ public class StrikerController : MonoBehaviour
         }
         else
         {
-            transform.position = new Vector2(AISide.x, AISide.y);
+            // transform.position = new Vector2(AISide.x, AISide.y);
         }
         // if (rb.velocity.magnitude < stopThreshold && tikkis.rb.velocity.magnitude < stopThreshold)
         // {
@@ -136,13 +136,13 @@ public class StrikerController : MonoBehaviour
         {
             // Striker has stopped moving
             rb.velocity = Vector2.zero;
-            transform.position = AISide;
+            // transform.position = AISide;
             Arrow.enabled = false;
             striked = false;
             LockedX = false;
             TurnOver = true;
             HasStopped = true;
-            // AIController.AIStriked = false;
+            AIController.AIStriked = false;
             // GameManager.aiturn = true;
 
         }

@@ -8,7 +8,7 @@ public class AIController : MonoBehaviour
     public float minForce = 20f;
     private Rigidbody2D rb;
     private StrikerController striker;
-    public bool AIStriked;
+    public static bool AIStriked;
 
     void Start()
     {
