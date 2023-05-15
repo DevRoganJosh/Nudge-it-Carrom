@@ -26,6 +26,7 @@ public class StrikerController : MonoBehaviour
     public static Vector3 AISide;
     Pucks tikkis;
     bool doOnce = true;
+    Collider2D coll;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -36,6 +37,7 @@ public class StrikerController : MonoBehaviour
         AISide.x = initialPosition.x;
         AISide.y = initialPosition.y + 3.77f;
         tikkis = FindObjectOfType<Pucks>();
+        coll = GetComponent<Collider2D>();
     }
 
     void Update()
@@ -45,17 +47,7 @@ public class StrikerController : MonoBehaviour
         {
             MyTurn();
         }
-        else
-        {
-            // transform.position = new Vector2(AISide.x, AISide.y);
-        }
-        // if (rb.velocity.magnitude < stopThreshold && tikkis.rb.velocity.magnitude < stopThreshold)
-        // {
-        //     if (AIController.AIStriked || striked)
-        //     {
-        //         HasStopped = true;
-        //     }
-        // }
+        coll.isTrigger = isDraggingX;
     }
 
     private void OnMouseDown()
@@ -79,12 +71,13 @@ public class StrikerController : MonoBehaviour
             }
     }
     private void OnMouseUp()
-    {
+    {   
+        if(!TurnOver)
         if (isCharging)
         {
             isCharging = false;
             striked = true;
-
+            coll.isTrigger = false;
             Strike();
         }
     }

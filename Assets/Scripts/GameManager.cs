@@ -12,10 +12,13 @@ public class GameManager : MonoBehaviour
     public bool IsGameOver = false;
     public Text ShortTimerTxt;
     public static bool TimeOver = false;
-    public float timeRemaining = 10f;
+    public float timeRemaining = 11f;
 
+    private bool isScoreDecreased = false;
     void Start()
     {
+        ScoreP = 0;
+        ScoreAI = 0;
     }
 
     // Update is called once per frame
@@ -60,11 +63,20 @@ public class GameManager : MonoBehaviour
 
     public void ShortTimerUpdate()
     {
-        if (timeRemaining >= 0)
+        if (timeRemaining > 0)
         {
             timeRemaining -= Time.deltaTime;
             float seconds = Mathf.FloorToInt(timeRemaining);
             ShortTimerTxt.text = seconds.ToString();
         }
+        else if (timeRemaining <= 0 && !isScoreDecreased) // change condition to <= 0
+        {
+            Debug.Log("-1 point");
+            ScoreP--;
+            isScoreDecreased = true;
+            timeRemaining = 0; // reset timer to 0
+            ShortTimerTxt.text = "0"; // update text to show 0 seconds
+        }
     }
+
 }
