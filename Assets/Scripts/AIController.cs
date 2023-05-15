@@ -34,7 +34,8 @@ public class AIController : MonoBehaviour
             rb.AddForce(direction * force, ForceMode2D.Impulse);
 
             // End the AI's turn
-            striker.MyTurn();
+            // striker.MyTurn();
+            StrikerController.TurnOver = false;
             GameManager.aiturn = false;
 
         }

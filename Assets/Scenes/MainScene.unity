@@ -431,6 +431,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46593e17aacd73243a59f484af38ad0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PlayerScoreText: {fileID: 2027000115}
+  AIScoreText: {fileID: 1704387025}
 --- !u!1001 &428626476
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1368,6 +1370,8 @@ MonoBehaviour:
   ScoreP: 0
   ScoreAI: 0
   IsGameOver: 0
+  ShortTimerTxt: {fileID: 1640232069}
+  timeRemaining: 10
 --- !u!4 &936806259
 Transform:
   m_ObjectHideFlags: 0
@@ -3078,6 +3082,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46593e17aacd73243a59f484af38ad0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PlayerScoreText: {fileID: 2027000115}
+  AIScoreText: {fileID: 1704387025}
 --- !u!4 &1924396244 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8431690416439856980, guid: 4f381d6abbe90734a88bdd3a8f3267ca, type: 3}
@@ -3372,6 +3378,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46593e17aacd73243a59f484af38ad0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PlayerScoreText: {fileID: 2027000115}
+  AIScoreText: {fileID: 1704387025}
 --- !u!1 &2027000113
 GameObject:
   m_ObjectHideFlags: 0
@@ -3568,6 +3576,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46593e17aacd73243a59f484af38ad0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PlayerScoreText: {fileID: 2027000115}
+  AIScoreText: {fileID: 1704387025}
 --- !u!1001 &2067999048
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4049,8 +4059,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29e6222069331324bb9079be63ad079e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxForce: 24
-  minForce: 16
+  maxForce: 30
+  minForce: 20
 --- !u!1001 &8431690416663133056
 PrefabInstance:
   m_ObjectHideFlags: 0

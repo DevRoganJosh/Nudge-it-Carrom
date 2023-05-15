@@ -49,7 +49,7 @@ public class StrikerController : MonoBehaviour
         {
             transform.position = new Vector2(AISide.x,AISide.y);
         }
-
+        
     }
 
     private void OnMouseDown()
@@ -131,7 +131,7 @@ public class StrikerController : MonoBehaviour
         {
             // Striker has stopped moving
             rb.velocity = Vector2.zero;
-            transform.position = initialPosition;
+            // transform.position = initialPosition;
             Arrow.enabled = false;
             striked = false;
             LockedX = false;
