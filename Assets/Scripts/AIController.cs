@@ -9,6 +9,7 @@ public class AIController : MonoBehaviour
     private Rigidbody2D rb;
     private StrikerController striker;
     public static bool AIStriked;
+    public GameObject TO;
 
     void Start()
     {
@@ -33,11 +34,17 @@ public class AIController : MonoBehaviour
             // Strike the striker with the calculated force and direction
             rb.AddForce(direction * force, ForceMode2D.Impulse);
             AIStriked = true;
+
         }
 
         if (AIStriked && rb.velocity.magnitude < 0.001f)
         {
             StrikerController.TurnOver = false;
+            TO.SetActive(true);
+        }
+        if (GameManager.aiturn)
+        {
+            TO.SetActive(false);
         }
     }
 }
