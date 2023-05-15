@@ -26,7 +26,6 @@ public class StrikerController : MonoBehaviour
     public static Vector3 AISide;
     Pucks tikkis;
     bool doOnce = true;
-    Collider2D coll;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -37,7 +36,6 @@ public class StrikerController : MonoBehaviour
         AISide.x = initialPosition.x;
         AISide.y = initialPosition.y + 3.77f;
         tikkis = FindObjectOfType<Pucks>();
-        coll = GetComponent<Collider2D>();
     }
 
     void Update()
@@ -47,7 +45,6 @@ public class StrikerController : MonoBehaviour
         {
             MyTurn();
         }
-        coll.isTrigger = isDraggingX;
     }
 
     private void OnMouseDown()
@@ -78,18 +75,16 @@ public class StrikerController : MonoBehaviour
         {
             isCharging = false;
             striked = true;
-            coll.isTrigger = false;
             Strike();
         }
     }
 
     public void onClickLock()
     {
-        if (rb.velocity.magnitude < stopThreshold && tikkis.rb.velocity.magnitude < stopThreshold)
+        if (rb.velocity.magnitude < stopThreshold && tikkis.rb.velocity.magnitude < stopThreshold )
             if (!LockedX)
             {
                 LockedX = true;
-
             }
             else
             {
@@ -98,7 +93,7 @@ public class StrikerController : MonoBehaviour
             }
     }
     public void Strike()
-    {
+    {   
         float distance = Vector3.Distance(transform.position, LockedPosition);
         float strength = distance * forceMultiplier / Mathf.Max(0.1f, CY - chargeClampY);
         Vector2 direction = Arrow.GetPosition(1) - Arrow.GetPosition(0);
