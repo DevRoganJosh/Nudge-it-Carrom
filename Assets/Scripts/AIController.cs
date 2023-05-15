@@ -18,7 +18,7 @@ public class AIController : MonoBehaviour
 
     void Update()
     {
-        if (GameManager.aiturn && StrikerController.HasStopped && Pockets.counter < 17 && !AIStriked)
+        if (GameManager.aiturn && StrikerController.HasStopped && Pockets.counter < 17 && !AIStriked && !Timer.TimeOver)
         {
             Pucks[] pucks = FindObjectsOfType<Pucks>();
             int index = Random.Range(0, pucks.Length);

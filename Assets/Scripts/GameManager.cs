@@ -9,9 +9,7 @@ public class GameManager : MonoBehaviour
     public static bool aiturn = false;
     public int ScoreP = 0;
     public int ScoreAI = 0;
-    public bool IsGameOver = false;
     public Text ShortTimerTxt;
-    public static bool TimeOver = false;
     public float timeRemaining = 11f;
 
     private bool isScoreDecreased = false;
@@ -33,18 +31,6 @@ public class GameManager : MonoBehaviour
             // ai.enabled = false;
             aiturn = false;
         }
-        if (IsGameOver)
-        {
-            ai.enabled = false;
-            if (ScoreAI > ScoreP)
-            {
-                Debug.Log("You Lost");
-            }
-            else
-            {
-                Debug.Log("You Won");
-            }
-        }
         if (!StrikerController.TurnOver && !StrikerController.striked)
         {
             ShortTimerUpdate();
@@ -63,20 +49,21 @@ public class GameManager : MonoBehaviour
 
     public void ShortTimerUpdate()
     {
-        if (timeRemaining > 0)
-        {
-            timeRemaining -= Time.deltaTime;
-            float seconds = Mathf.FloorToInt(timeRemaining);
-            ShortTimerTxt.text = seconds.ToString();
-        }
-        else if (timeRemaining <= 0 && !isScoreDecreased) // change condition to <= 0
-        {
-            Debug.Log("-1 point");
-            ScoreP--;
-            isScoreDecreased = true;
-            timeRemaining = 0; // reset timer to 0
-            ShortTimerTxt.text = "0"; // update text to show 0 seconds
-        }
+        if (!Timer.TimeOver)
+            if (timeRemaining > 0)
+            {
+                timeRemaining -= Time.deltaTime;
+                float seconds = Mathf.FloorToInt(timeRemaining);
+                ShortTimerTxt.text = seconds.ToString();
+            }
+            else if (timeRemaining <= 0 && !isScoreDecreased) // change condition to <= 0
+            {
+                Debug.Log("-1 point");
+                ScoreP--;
+                isScoreDecreased = true;
+                timeRemaining = 0; // reset timer to 0
+                ShortTimerTxt.text = "0"; // update text to show 0 seconds
+            }
     }
 
 }

@@ -6,6 +6,8 @@ public class Timer : MonoBehaviour
     public float timeRemaining = 120f;
     public static bool TimeOver = false;
     public TextMeshProUGUI timerText;
+    public GameObject GamePanel;
+    public GameObject GameOverPanel;
 
     private void Update()
     {
@@ -16,8 +18,11 @@ public class Timer : MonoBehaviour
         }
         else
         {
-            
+            timeRemaining = 0;
+            timerText.text = "00:00";
+            TimeOver = true;
         }
+        GameOver();
     }
 
     void DisplayTime(float timeToDisplay)
@@ -26,5 +31,14 @@ public class Timer : MonoBehaviour
         float seconds = Mathf.FloorToInt(timeToDisplay % 60);
 
         timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+    }
+
+    public void GameOver()
+    {
+        if(TimeOver)
+        {
+            GamePanel.SetActive(false);
+            GameOverPanel.SetActive(true);
+        }
     }
 }
